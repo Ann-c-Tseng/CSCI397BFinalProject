@@ -6,27 +6,39 @@ session_start();
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>PHP Wall</title>
+    <title>CSCI397B Final Project</title>
     <link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 <body>
-<h1> Post Wall </h1>
+<h1> CSCI397B Final Project | Argon </h1>
     <div id="wrapper">
         <div id="menu">
             <a class="item" href="index.php"> Home </a>
 
             <div id="userbar">
-<?php
-            if($_SESSION['signed_in'])
-            {
-                echo 'Hello ' . $_SESSION['user_name'] . 
-                '.&nbsp;&nbsp;&nbsp;<a href="signout.php"> Sign out </a>';
-            }
-            else{
-                echo '<a href="signin.php"> Sign in </a> or <a href="signup.php"> Create an account </a>.';
-            }
-?>
+                <?php
+                            if($_SESSION['signed_in'])
+                            {
+                                echo 'Hello ' . $_SESSION['user_name'] . 
+                                '.&nbsp;&nbsp;&nbsp;<a href="signout.php"> Sign out </a>';
+                            }
+                            else{
+                                echo '<a href="signin.php"> Sign in </a> or <a href="signup.php"> Create an account </a>.';
+                            }
+                ?>
             </div>
         </div>
         <br><br>
-        <div id="content">
+
+
+
+        <!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
+        <div id="content"> 
+            <?php
+                        if($_SESSION['signed_in']) {
+                            echo '<h1> Current Feed (Status: Signed In) </h1>';
+                        } else{
+                            echo ' <h1> Curent Feed (Status: Viewer/Not signed in) </h1>';
+                        }
+            ?>
+        </div>
