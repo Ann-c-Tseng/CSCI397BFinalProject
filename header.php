@@ -36,9 +36,9 @@ session_start();
         <div id="content"> 
             <?php
                         if($_SESSION['signed_in']) {
-                            echo '<h1> Current Feed (Status: Signed In) </h1>';
+                            echo '<p> Current Feed (Status: Signed In) </p>';
                         } else{
-                            echo ' <h1> Curent Feed (Status: Viewer/Not signed in) </h1>';
+                            echo ' <p> Curent Feed (Status: Viewer/Not signed in) </p>';
                         }
             ?>
         </div>
