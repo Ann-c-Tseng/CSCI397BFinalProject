@@ -2,7 +2,7 @@
         function checkValidation() {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
-            alert('username: ' + username + '\npassword: ' + password);
+            // alert('username: ' + username + '\npassword: ' + password);
             if(username == "") {
                 alert("The username cannot be empty");
                 return false;
@@ -29,7 +29,7 @@
                 alert("A password must be greater than 7 characters and less than 254 characters");
                 return false;
             }
-            alert('all checks passed in sign in!')
+            // alert('all checks passed in sign in!')
             return true;
             document.getElementById("signinform").submit();
         }
