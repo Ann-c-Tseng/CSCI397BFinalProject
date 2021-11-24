@@ -11,14 +11,14 @@
     <?php
             if(isset($_SESSION['signed_in']))
             {
-                //grab all categories from 'posts' where viewerviewable == true
+                //grab all categories from 'posts'
                 $catQ = "SELECT ALL category FROM posts;";
 
                 $cats = $db->query($catQ);
 
 
                 if($cats == null){
-                    echo 'Something went wrong while signing in. Please try again.';
+                    echo 'Something went wrong while accessing the database. Please try again later.';
                 }
 
                 else{
