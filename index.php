@@ -28,35 +28,19 @@
                 else{
                     echo '<br> made it into else <br>';
 
-                    //$catsArr = $cats->fetch(PDO::FETCH_ASSOC); 
-                    //echo '<br>'.print_r($catsArr);
-
                     while($row = $cats->fetch(PDO::FETCH_ASSOC)){
                         $result[] = $row;
                     }
                     
                     // Array of all column names
                     $columnArr = array_column($result, 'category');
-                        
+
                     for($i = 0; $i < count($columnArr); $i++){
-                        echo $columnArr[$i].'<br>';
+                        echo '<div class="category" name="'.$columnArr[$i].'"><p class="categoryName">'.$columnArr[$i].'
+                               </p></div>';
                     }
 
-                    /*if($rowAry['permission']=="superuser") 
-                    {
-                        echo 'User is a superuser';
-                    }
-                    if($rowAry['permission']=="admin") 
-                    {
-                        echo 'User is an admin';
-                    }
-                    if($rowAry['permission']=="poster") 
-                    {
-                        echo 'User is a poster';
-                    }
-                    else{
-                        echo 'Error occurred';
-                    }*/
+                   
                 }
 
             }
@@ -65,4 +49,7 @@
             }
                ?>
             
-</div>
+</div><!-- content --> 
+<!--</div>--wrapper-->
+</body>
+</html>
