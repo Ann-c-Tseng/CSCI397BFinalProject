@@ -48,7 +48,7 @@ if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
                 $_SESSION['username'] = $rowAry['username']; 
                 $_SESSION['permission'] = $rowAry['permission'];
                 
-                echo 'Welcome, ' . $_SESSION['username'] . '.<br>'; 
+                echo 'Welcome, ' . $_SESSION['username'] . '.<br>';
                 echo '<br><a href="index.php">Home</a><br>';
                 echo '<a href="signout.php">Sign out</a><br>';
             } 
