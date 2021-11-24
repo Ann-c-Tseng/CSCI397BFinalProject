@@ -5,64 +5,67 @@
 
 <!-- Check if user is viewer or signed in, show corresponding categories-->
 
-<!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
 <div id="content"> 
     <?php
-        /* Don't think this works but might be an okay starting place? not sure though. i'll leave it commented */
-            if(isset($_SESSION['signed_in']))
+            if(isset($_SESSION['signed_in'])) //If signed in, show all categories
             {
-                echo 'signed in. user is a superuser, admin, or poster';
 
-                $name = $_SESSION['username'];
-
-                //grab all categories from 'posts' where viewerviewable == true
                 $catQ = "SELECT ALL category FROM posts;";
 
                 $cats = $db->query($catQ);
 
 
                 if($cats == null){
-                    echo 'Something went wrong while signing in. Please try again.';
-                }
-
-                else{
-                    echo '<br> made it into else <br>';
-
-                    //$catsArr = $cats->fetch(PDO::FETCH_ASSOC); 
-                    //echo '<br>'.print_r($catsArr);
+                    echo 'Something went wrong while accessing the database. Please try again later.';
+                } else {
+                    // echo '<br> made it into else <br>';
 
                     while($row = $cats->fetch(PDO::FETCH_ASSOC)){
                         $result[] = $row;
                     }
                     
-                    // Array of all column names
+                    // Array of all column names (Super crucial for search bar as well!)
                     $columnArr = array_column($result, 'category');
                         
                     for($i = 0; $i < count($columnArr); $i++){
-                        echo $columnArr[$i].'<br>';
+                        echo "<a href=\"topics.php\">".$columnArr[$i]."</a><br>";
                     }
-
-                    /*if($rowAry['permission']=="superuser") 
-                    {
-                        echo 'User is a superuser';
-                    }
-                    if($rowAry['permission']=="admin") 
-                    {
-                        echo 'User is an admin';
-                    }
-                    if($rowAry['permission']=="poster") 
-                    {
-                        echo 'User is a poster';
-                    }
-                    else{
-                        echo 'Error occurred';
-                    }*/
                 }
 
-            }
-            else{
-                echo 'not signed in, can only view';
-            }
-               ?>
-            
+            } else{ //If not signed in, still show all categories but when reaching viewerviewable==0(false), print out signin prompt
+                $catQ = "SELECT ALL category FROM posts;";
+                $cats = $db->query($catQ);
+
+                $viewableQ = "SELECT viewerviewable FROM `posts` WHERE 1;";
+                $viewable = $db->query($viewableQ);
+
+                if($cats == null){
+                    echo 'Something went wrong while accessing the database. Please try again later.';
+                } else {
+                    // echo '<br> made it into else <br>';
+
+                    while($row = $cats->fetch(PDO::FETCH_ASSOC)){
+                        $result[] = $row;
+                    }
+
+                    while($row= $viewable->fetch(PDO::FETCH_ASSOC)) {
+                        $viewableresult[] = $row;
+                    }
+                    
+                    // Array of all values from the 'category' column (Super crucial for search bar as well!)
+                    $columnArr = array_column($result, 'category');
+
+                    //Array of all values from the 'viewerviewable' column
+                    $viewableArr = array_column($viewableresult, 'viewerviewable');
+
+                    for($i = 0; $i < count($columnArr); $i++){
+                        if($viewableArr[$i]==0) { //If viewerviewable==0(false), we tell viewer they need to signin
+                            echo "<p>".$columnArr[$i]." is only viewable when signed in.</p><br>";
+                        } else { //otherwise, just show the value from 'category' with a link to topics.
+                            echo "<a href=\"topics.php\">".$columnArr[$i]."</a><br>";
+                        }
+                    }
+                }
+            } 
+    ?>    
 </div>
