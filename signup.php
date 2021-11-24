@@ -1,6 +1,6 @@
 <script> 
         function checkValidation() {
-            alert('in check validation for sign up');
+            // alert('in check validation for sign up');
             var username = document.getElementById("username").value;         
             var password = document.getElementById("password").value;
             var passwordcheck = document.getElementById("password_check").value;
@@ -10,25 +10,25 @@
                 alert("The username cannot be empty");
                 return false;
             }
-            alert('1');
+            // alert('1');
             if(password == "") {
                 alert("The password cannot be empty");
                 return false;
             }
-            alert('2');
+            // alert('2');
 
             if(passwordcheck == "") {
                 alert("The repeat password field cannot be empty");
                 return false;
             }
-            alert('3');
+            // alert('3');
 
             //Check to make sure password and passwordcheck are equal 
             if(passwordcheck != password) {
                 alert("Your password inputs do not match, please check them again");
                 return false;
             }
-            alert('4');
+            // alert('4');
 
             //Check to make sure all username and password are within the range
             //and that the username, password only have the accepted characters, numbers, and symbols. 
@@ -39,14 +39,14 @@
                 alert("Please check your username or password again, as we only allow numbers, letters and the following special characters: ! @ and * in both fields");
                 return false;
             }
-            alert('5');
+            // alert('5');
             
             if(username.length <= 2 || username.length >= 29) {
                 alert("A username must be greater than 2 characters and less than 29 characters");
                 return false;
             }            
             
-            alert('password length: ' + password.length + '\n' + (password.length <= 7));
+            // alert('password length: ' + password.length + '\n' + (password.length <= 7));
 
             if((password.length <= 7 || password.length >= 254) && (passwordcheck.length <= 7 || passwordcheck.length >= 254)) {
                 alert("A password must be greater than 7 characters and less than 254 characters");
