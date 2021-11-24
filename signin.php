@@ -46,8 +46,8 @@ if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
     echo '<h3>Sign in</h3>';
     echo '<form method="post" action="signedin.php" id="signinform">
     <input type="hidden" name="activity" value="signin"> 
-    <label>Username: <input type="text" name="user_name" id="user_name"></label> 
-    <label>Password: <input type="password" name="user_pass" id="user_pass"></label> 
+    <label>Username: <input type="text" name="username" id="username"></label> 
+    <label>Password: <input type="password" name="password" id="password"></label>
     <button type="submit" onclick="return checkValidation()"/>sign in</button>
     </form>';
 }
