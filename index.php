@@ -5,7 +5,9 @@
 
 <!-- Check if user is viewer or signed in, show corresponding categories-->
 <!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
+
 <div id="content"> 
+    <h4> Categories: <h4>
     <?php
             if(isset($_SESSION['signed_in']))
             {
