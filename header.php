@@ -34,11 +34,4 @@ session_start();
 
         <!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
         <div id="content"> 
-            <?php
-                        if($_SESSION['signed_in']) {
-                            echo '<p> Current Feed (Status: Signed In) </p>';
-                        } else{
-                            echo ' <p> Curent Feed (Status: Viewer/Not signed in) </p>';
-                        }
-            ?>
         </div>
