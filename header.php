@@ -19,7 +19,7 @@ session_start();
                 <?php
                             if($_SESSION['signed_in'])
                             {
-                                echo 'Hello ' . $_SESSION['user_name'] . 
+                                echo 'Hello ' . $_SESSION['username'] . 
                                 '.&nbsp;&nbsp;&nbsp;<a href="signout.php"> Sign out </a>';
                             }
                             else{
@@ -29,9 +29,3 @@ session_start();
             </div>
         </div>
         <br><br>
-
-
-
-        <!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
-        <div id="content"> 
-        </div>
