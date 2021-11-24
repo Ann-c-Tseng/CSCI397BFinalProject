@@ -7,6 +7,21 @@ body {
     text-align: center;
 }
 
+#createCategory{
+    padding: 20px 15px;
+    border: solid black 2px;
+    border-radius: 30px;
+    text-align: right;
+    color: white;
+    margin: auto;
+
+}
+#buttonsDiv{
+    text-align: right;
+    margin: 100px;
+    background-color: violet;
+}
+
 #wrapper {
     width: 600px;
     margin: 0 auto;

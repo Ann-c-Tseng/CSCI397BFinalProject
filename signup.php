@@ -60,7 +60,11 @@
 include 'connect.php';
 include 'header.php';
 
-$activity = $_REQUEST['activity'];
+if(isset($_REQUEST['activity'])){
+    $activity = $_REQUEST['activity']; 
+} else{
+    $activity = '';
+}
 if($activity=="signup")
 {
     $name = $_REQUEST['username'];

@@ -35,7 +35,7 @@ if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
         if($rows == null) {
             echo 'Something went wrong while signing in. Please try again.'; 
         } else {
-            $rowAry = $rows->fetch($rows->FETCH_ASSOC);
+            $rowAry = $rows->fetch(PDO::FETCH_ASSOC); 
             if((password_verify($pass, $rowAry['password']) == false) || 
                 (count($rowAry) == 0) ||
                 ($rowAry == null))
