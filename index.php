@@ -37,7 +37,7 @@
                     
                     // Array of all column names
                     $columnArr = array_column($result, 'category');
-
+                        
                     for($i = 0; $i < count($columnArr); $i++){
                         echo $columnArr[$i].'<br>';
                     }
