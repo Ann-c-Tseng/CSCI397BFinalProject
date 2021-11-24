@@ -53,7 +53,7 @@ if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
                 echo '<a href="signout.php">Sign out</a><br>';
             } 
         }
-    } 
+    }
 }
 
 ?>
