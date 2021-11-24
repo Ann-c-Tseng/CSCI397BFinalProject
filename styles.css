@@ -6,20 +6,21 @@ body {
     background-color: #ffffff;
     text-align: center;
 }
-
-.btnOne{
-    padding: 20px 15px;
-    border: solid black 2px;
-    border-radius: 30px;
-    text-align: right;
+.category{
+    min-width: 80%;
+    min-height: 50px;
+    background-color: #4d85ff;
     color: white;
-    margin: auto;
-
+    border: 2px solid #4d85ff;
+    border-radius: 10px;
+    text-align: center;
+    margin: 10px auto;
 }
-#buttonsDiv{
-    text-align: right;
-    margin: 100px;
-    background-color: violet;
+.categoryName{
+    padding: 100px auto;
+    margin: auto;
+    text-align: center;
+    font-size: x-large;
 }
 
 #wrapper {
@@ -40,6 +41,7 @@ body {
 
     border-radius: 4px;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    display: inline;
 }
 
 /* Navbar styles */
