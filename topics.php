@@ -1,6 +1,7 @@
 <?php
     include 'header.php';
-    include 'connect.php'
+    include 'connect.php';
+    include 'index.php';
 ?>
 
 <!-- Show corresponding topics-->

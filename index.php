@@ -1,6 +1,6 @@
 <?php
     include 'header.php';
-    include 'connect.php'
+    include 'connect.php';
 ?>
 
 <!-- Check if user is viewer or signed in, show corresponding categories-->
@@ -66,7 +66,7 @@
                         if($viewableArr[$i]==0) { //If viewerviewable==0(false), we tell viewer they need to signin
                             echo "<p> Topic: ".$columnArr[$i]." - must have an account and logged in to view!</p><br>";
                         } else { //otherwise, just show the value from 'category' with a link to topics.
-                            echo "<a href=\"topics.php\">".$columnArr[$i]."</a><br>";
+                            echo '<div class="category" name="'.$columnArr[$i].'"> <a class="categoryName" href="topics.php">'.$columnArr[$i].'</a></div>';
                         }
                     }
                 }
