@@ -50,5 +50,7 @@ if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
     <label>Password: <input type="password" name="password" id="password"></label>
     <button type="submit" onclick="return checkValidation()"/>sign in</button>
     </form>';
+    echo "Don't have an account yet?";
+    echo '<a href="signup.php"> Create an account </a>.';
 }
 ?>

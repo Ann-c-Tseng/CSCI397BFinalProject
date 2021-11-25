@@ -1,77 +1,95 @@
 <?php
     include 'header.php';
-    include 'connect.php';
+    include 'connect.php'
 ?>
 
 <!-- Check if user is viewer or signed in, show corresponding categories-->
-<!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
 
+<!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
 <div id="content"> 
-    <h4> Categories: <h4>
     <?php
+        /* Don't think this works but might be an okay starting place? not sure though. i'll leave it commented */
             if(isset($_SESSION['signed_in']))
             {
-                //grab all categories from 'posts'
-                $catQ = "SELECT ALL category FROM posts;";
+                echo 'signed in. user is a superuser, admin, or poster';
 
+                $name = $_SESSION['username'];
+
+                //grab all categories from 'posts' because all categories are viewable when we are signed in
+                $catQ = "SELECT DISTINCT * FROM posts;";
                 $cats = $db->query($catQ);
 
-
                 if($cats == null){
-                    echo 'Something went wrong while accessing the database. Please try again later.';
-                }
-
-                else{
+                    echo 'No Categories created yet.';
+                } else{
 
                     while($row = $cats->fetch(PDO::FETCH_ASSOC)){
                         $result[] = $row;
                     }
                     
-                    // Array of all column names (Crucial for search bar!)
+                    // Array of all column names
                     $columnArr = array_column($result, 'category');
-
-                    for($i = 0; $i < count($columnArr); $i++){
-                        echo '<div class="category" name="'.$columnArr[$i].'"> <a class="categoryName" href="topics.php">'.$columnArr[$i].'</a></div>';
-                    }
-                }
-
-            } else {
-                //If not signed in, still show all categories but when reaching viewerviewable==0(false), print out signin prompt
-                $catQ = "SELECT ALL category FROM posts;";
-                $cats = $db->query($catQ);
-
-                $viewableQ = "SELECT viewerviewable FROM `posts` WHERE 1;";
-                $viewable = $db->query($viewableQ);
-
-                if($cats == null){
-                    echo 'Something went wrong while accessing the database. Please try again later.';
-                } else {
-                    // echo '<br> made it into else <br>';
-
-                    while($row = $cats->fetch(PDO::FETCH_ASSOC)){
-                        $result[] = $row;
-                    }
-
-                    while($row= $viewable->fetch(PDO::FETCH_ASSOC)) {
-                        $viewableresult[] = $row;
-                    }
                     
-                    // Array of all values from the 'category' column (Super crucial for search bar as well!)
-                    $columnArr = array_column($result, 'category');
-
-                    //Array of all values from the 'viewerviewable' column
-                    $viewableArr = array_column($viewableresult, 'viewerviewable');
-
+                    echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
                     for($i = 0; $i < count($columnArr); $i++){
-                        if($viewableArr[$i]==0) { //If viewerviewable==0(false), we tell viewer they need to signin
-                            echo "<p> Topic: ".$columnArr[$i]." - must have an account and logged in to view!</p><br>";
-                        } else { //otherwise, just show the value from 'category' with a link to topics.
-                            echo '<div class="category" name="'.$columnArr[$i].'"> <a class="categoryName" href="topics.php">'.$columnArr[$i].'</a></div>';
-                        }
+                        //otherwise, just show the value from 'category' with a link to topics.
+                        echo '<button type="submit" class="category" id="'.$columnArr[$i].'" name="'.$columnArr[$i].'">'.$columnArr[$i].'</button>';
                     }
+                    echo '.</form>';
                 }
+
             }
-    ?>  
-</div>
+            else{
+                    echo 'not signed in';
+                    //If not signed in, still show all categories but when reaching viewerviewable==0(false), print out signin prompt
+
+                    //all categories where signed in users can see
+                    $catQ = "SELECT DISTINCT * FROM posts where viewerviewable = 1;";
+                    $cats = $db->query($catQ);
+
+                    //all categories where non signed in users can't access
+                    $viewsQ = "SELECT DISTINCT * FROM posts where viewerviewable = 0;";
+                    $views = $db->query($viewsQ);
+
+                    if($cats == null && $views == null){
+                        echo 'No Categories created yet.';
+
+                    } else{
+                        //everyone can view
+                        while($row = $cats->fetch(PDO::FETCH_ASSOC)){
+                            $result1[] = $row;
+                        }
+                        
+                        //not everyone can view
+                        while($row = $views->fetch(PDO::FETCH_ASSOC)){
+                            $result2[] = $row;
+                        }
+                        
+                        //Array that everyone can see
+                        $catsArr = array_column($result1, 'category');
+
+                        //Array that not everyone can see
+                        $viewsArr = array_column($result2, 'category');
+
+
+                        //First form to send user to sign in
+                        echo '<form action="./signin.php">';
+                        //Viewable to only signed in
+                        for($i = 0; $i < count($viewsArr); $i++){
+                            echo '<button type="submit" class="category" id="'.$viewsArr[$i].'" name="'.$viewsArr[$i].'">'.$viewsArr[$i].' -- log in to view</button>';
+                        }
+                        echo '</form>';
+
+
+                        //second form to send user to topics page
+                        echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
+                        for($i = 0; $i < count($catsArr); $i++){
+                            echo '<button type="submit" class="category" id="'.$catsArr[$i].'" name="'.$catsArr[$i].'">'.$catsArr[$i].'</button>';
+                        }
+                        echo '</form>';
+                    }
+            } ?>
+            
+</div><!-- content --> 
 </body>
 </html>
