@@ -73,12 +73,16 @@
 
 
                         //First form to send user to sign in
-                        echo '<form action="./signin.php">';
+                       // echo '<form action="./signin.php">';
+                       echo '<ul>';
                         //Viewable to only signed in
                         for($i = 0; $i < count($viewsArr); $i++){
-                            echo '<button type="submit" class="category" id="'.$viewsArr[$i].'" name="'.$viewsArr[$i].'">'.$viewsArr[$i].' -- log in to view</button>';
+                            echo '<li class="category"><a href="signin.php" >'.$viewsArr[$i].' --sign in to view</a></li>';
                         }
-                        echo '</form>';
+                        echo '</ul>';
+                       // echo '</form>';
+
+                       // echo '<button class="category"><a href="signin.php">'.$viewsArr[$i].' --sign in to view</a></button>';
 
 
                         //second form to send user to topics page

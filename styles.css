@@ -16,6 +16,12 @@ body {
     text-align: center;
     margin: 10px auto;
 }
+
+.category a{
+    text-decoration: none;
+    color: white;
+}
+
 .categoryName{
     padding: 100px auto;
     margin: auto;
