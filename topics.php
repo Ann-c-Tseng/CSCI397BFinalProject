@@ -4,8 +4,12 @@
 ?>
 
 <!-- Show corresponding topics-->
-<div id="content"> 
+<div id="content">
+    
     <?php
+        $category = $_REQUEST['cc'];
+        echo($category);
+
         $topQ = "SELECT ALL topic FROM posts;";
 
         $tops = $db->query($topQ);

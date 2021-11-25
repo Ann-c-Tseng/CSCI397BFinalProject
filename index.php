@@ -3,6 +3,13 @@
     include 'connect.php'
 ?>
 
+<script>
+    function categorychoice(cc) {
+        alert("hello" + cc);
+        document.getElementById('cc').value=cc;
+    }
+</script>
+
 <!-- Check if user is viewer or signed in, show corresponding categories-->
 
 <!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
@@ -84,8 +91,9 @@
                         //second form to send user to topics page
                         echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
                         for($i = 0; $i < count($catsArr); $i++){
-                            echo '<button type="submit" class="category" id="'.$catsArr[$i].'" name="'.$catsArr[$i].'">'.$catsArr[$i].'</button>';
+                            echo '<button type="submit" class="category" id="'.$catsArr[$i].'" name="'.$catsArr[$i].'" onclick="categorychoice("'.$catsArr[$i].'")>"'.$catsArr[$i].'"</button>';
                         }
+                        echo '<input type="hidden" id="cc" name="cc" value="">';
                         echo '</form>';
                     }
             } ?>
