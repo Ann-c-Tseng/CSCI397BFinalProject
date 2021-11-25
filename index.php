@@ -5,8 +5,8 @@
 
 <script>
     function categorychoice(cc) {
-        alert("hello" + cc);
-        document.getElementById('cc').value=cc;
+        document.getElementById('cc').value = cc.id;
+        return true;
     }
 </script>
 
@@ -89,15 +89,13 @@
                         echo '</ul>';
                        // echo '</form>';
 
-                       // echo '<button class="category"><a href="signin.php">'.$viewsArr[$i].' --sign in to view</a></button>';
-
 
                         //second form to send user to topics page
                         echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
                         for($i = 0; $i < count($catsArr); $i++){
-                            echo '<button type="submit" class="category" id="'.$catsArr[$i].'" name="'.$catsArr[$i].'" onclick="categorychoice("'.$catsArr[$i].'")>"'.$catsArr[$i].'"</button>';
-                        }
-                        echo '<input type="hidden" id="cc" name="cc" value="">';
+                            echo '<button type="submit" class="category" onclick="return categorychoice('.$catsArr[$i].')" id="'.$catsArr[$i].'" name="'.$catsArr[$i].'">'.$catsArr[$i].'</button>';
+                        }           //<button type="submit" onclick="return signUpValidate()">Sign Up</button> 
+                        echo '<input type = "hidden" id="cc" name="cc" value="">';
                         echo '</form>';
                     }
             } ?>

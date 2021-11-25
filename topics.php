@@ -8,7 +8,8 @@
     
     <?php
         $category = $_REQUEST['cc'];
-        echo($category);
+        echo($category)."<br>";
+        //Use ^^^^^ to query. something like select all topic from posts where category = $category ???????????
 
         $topQ = "SELECT ALL topic FROM posts;";
 
