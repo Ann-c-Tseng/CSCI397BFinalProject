@@ -15,10 +15,9 @@
 <!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
 <div id="content"> 
     <?php
-        /* Don't think this works but might be an okay starting place? not sure though. i'll leave it commented */
             if(isset($_SESSION['signed_in']))
             {
-                echo 'signed in. user is a superuser, admin, or poster';
+                echo 'Signed in: ';
 
                 $name = $_SESSION['username'];
 
@@ -34,25 +33,26 @@
                         $result[] = $row;
                     }
                     
-                    // Array of all column names
+                    // Array of all values in the 'category' column
                     $columnArr = array_column($result, 'category');
                     
                     echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
                     for($i = 0; $i < count($columnArr); $i++){
-                        //otherwise, just show the value from 'category' with a link to topics.
-                        echo '<button type="submit" class="category" id="'.$columnArr[$i].'" name="'.$columnArr[$i].'">'.$columnArr[$i].'</button>';
-                    }
+                        echo '<button type="submit" class="category" onclick="return categorychoice('.$columnArr[$i].')" id="'.$columnArr[$i].'" name="'.$columnArr[$i].'">'.$columnArr[$i].'</button>';
+                    }          
+                    echo '<input type = "hidden" id="cc" name="cc" value="">';
                     echo '.</form>';
                 }
 
             }
             else{
-                    echo 'not signed in';
+                    echo 'Not signed in:';
                     //If not signed in, still show all categories but when reaching viewerviewable==0(false), print out signin prompt
 
                     //all categories where signed in users can see
                     $catQ = "SELECT DISTINCT * FROM posts where viewerviewable = 1;";
                     $cats = $db->query($catQ);
+
 
                     //all categories where non signed in users can't access
                     $viewsQ = "SELECT DISTINCT * FROM posts where viewerviewable = 0;";
@@ -94,12 +94,12 @@
                         echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
                         for($i = 0; $i < count($catsArr); $i++){
                             echo '<button type="submit" class="category" onclick="return categorychoice('.$catsArr[$i].')" id="'.$catsArr[$i].'" name="'.$catsArr[$i].'">'.$catsArr[$i].'</button>';
-                        }           //<button type="submit" onclick="return signUpValidate()">Sign Up</button> 
+                        }          
                         echo '<input type = "hidden" id="cc" name="cc" value="">';
                         echo '</form>';
                     }
             } ?>
             
-</div><!-- content --> 
+</div>
 </body>
 </html>

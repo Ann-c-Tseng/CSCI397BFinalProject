@@ -11,7 +11,7 @@
         echo($category)."<br>";
         //Use ^^^^^ to query. something like select all topic from posts where category = $category ???????????
 
-        $topQ = "SELECT ALL topic FROM posts;";
+        $topQ = "SELECT ALL topic FROM posts WHERE category = '$category';";
 
         $tops = $db->query($topQ);
 
