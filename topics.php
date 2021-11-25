@@ -21,7 +21,6 @@
             while($row = $tops->fetch(PDO::FETCH_ASSOC)){
                 $result[] = $row;
             }
-            
             // Array of all values from the 'topic' column
             $columnArr = array_column($result, 'topic');
                 

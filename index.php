@@ -25,8 +25,8 @@
                 $catQ = "SELECT DISTINCT * FROM posts;";
                 $cats = $db->query($catQ);
 
-                if($cats == null){
-                    echo 'No Categories created yet.';
+                if($cats == null) {
+                    echo '<br> No Categories created yet.';
                 } else{
 
                     while($row = $cats->fetch(PDO::FETCH_ASSOC)){
@@ -58,9 +58,8 @@
                     $viewsQ = "SELECT DISTINCT * FROM posts where viewerviewable = 0;";
                     $views = $db->query($viewsQ);
 
-                    if($cats == null && $views == null){
-                        echo 'No Categories created yet.';
-
+                    if($cats == null && $views == null) {
+                        echo '<br> No Categories created yet.';
                     } else{
                         //everyone can view
                         while($row = $cats->fetch(PDO::FETCH_ASSOC)){
