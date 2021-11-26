@@ -16,12 +16,10 @@ echo '
 ';
 
 echo '
-    <form id="addcatbtnform" style="display:none;">
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value="John"><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value="Doe">
-    </form>
     <button id ="hidebtn" type="button" onclick="hideform()"; style="display:none;">Hide Form</button>
+    <form id="addcatbtnform" style="display:none;">
+        <label>New Category Name:</label><br>
+        <input value=""><br>
+    </form> 
 ';
 ?>
