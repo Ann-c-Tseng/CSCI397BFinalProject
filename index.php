@@ -1,6 +1,6 @@
 <?php
     include 'header.php';
-    include 'connect.php'
+    include 'connect.php';
 ?>
 
 <script>
@@ -122,3 +122,7 @@
 </div>
 </body>
 </html>
+
+<?php
+    include 'addcatbtn.php';
+?>
