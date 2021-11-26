@@ -141,18 +141,3 @@
 </div>
 </body>
 </html>
-
-<!-- Check to see if person is super user, if so, show "add category button" -->
-<?php
-    if(isset($_SESSION['signed_in']))
-    {
-        $vv = $_SESSION['permission'];
-        echo "Your permission status is: ".$vv."<br>";
-        
-        if($vv === "superuser") {
-            include 'addcatbtn.php';
-        }
-    } else {
-        echo "Your permission status is: viewer <br>";
-    }
-?>
