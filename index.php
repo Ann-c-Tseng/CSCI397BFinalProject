@@ -71,18 +71,10 @@
                     $viewsQ = "SELECT DISTINCT category FROM posts where viewerviewable = 0;";
                     $views = $db->query($viewsQ);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 430721a7f81631b37f2efcf783c58f25b09833db
                     if($cats == null && $views == null) {
                         echo '<br> No Categories created yet.';
                     } else{
                         //everyone can view
-<<<<<<< HEAD
-=======
-
->>>>>>> 430721a7f81631b37f2efcf783c58f25b09833db
                         while($row = $cats->fetch(PDO::FETCH_ASSOC)){
                             $result1[] = $row;
                         }
