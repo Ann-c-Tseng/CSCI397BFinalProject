@@ -31,8 +31,9 @@
                 //grab all categories from 'posts' because all categories are viewable when we are signed in
                 $catQ = "SELECT DISTINCT category FROM posts;";
                 $cats = $db->query($catQ);
+                $catsrow = $cats->fetch();
 
-                if($cats == null) {
+                if($catsrow == null) {
                     echo '<br> No Categories created yet.';
                 } else{
 
@@ -66,15 +67,23 @@
                     $catQ = "SELECT DISTINCT category FROM posts where viewerviewable = 1;";
                     $cats = $db->query($catQ);
 
+                    $catrow = $cats->fetch();
+
 
                     //all categories where non signed in users can't access
                     $viewsQ = "SELECT DISTINCT category FROM posts where viewerviewable = 0;";
                     $views = $db->query($viewsQ);
 
-                    if($cats == null && $views == null) {
+                    $viewrow = $views->fetch();
+
+                    if($catrow == null && $viewrow == null) {
                         echo '<br> No Categories created yet.';
                     } else{
                         //everyone can view
+
+                        $result1[] = null;
+                        $result2[] = null;
+
                         while($row = $cats->fetch(PDO::FETCH_ASSOC)){
                             $result1[] = $row;
                         }
