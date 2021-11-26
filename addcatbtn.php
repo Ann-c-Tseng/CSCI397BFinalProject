@@ -17,9 +17,10 @@ echo '
 
 echo '
     <button id ="hidebtn" type="button" onclick="hideform()"; style="display:none;">Hide Form</button>
-    <form id="addcatbtnform" style="display:none;">
+    <form method="post" action="addcategorynow.php" id="addcatbtnform" style="display:none;">
         <label>New Category Name:</label><br>
         <input value=""><br>
-    </form> 
+        <button type="submit"/>Submit Category</button>
+    </form> <br>
 ';
 ?>
