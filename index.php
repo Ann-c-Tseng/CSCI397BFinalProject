@@ -134,5 +134,7 @@
         if($vv === "superuser") {
             include 'addcatbtn.php';
         }
-    };
+    } else {
+        echo "Your permission status is: viewer <br>";
+    }
 ?>
