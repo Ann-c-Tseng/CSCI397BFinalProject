@@ -19,12 +19,12 @@ session_start();
                 <?php   if(isset($_SESSION['signed_in'])) {
                             if($_SESSION['signed_in'])
                             {
-                                echo 'Hello ' . $_SESSION['username'] . 
-                                '.&nbsp;&nbsp;&nbsp;<a href="signout.php"> Sign out </a>';
+                                echo 'Hello ' . $_SESSION['username']. 
+                                '.&nbsp;&nbsp;<a href="signout.php">Sign out</a>';
                             }
                         }
                         else{
-                            echo '<a href="signin.php"> Sign in </a> or <a href="signup.php"> Create an account </a>.';
+                            echo '<a href="signin.php">Sign in</a> or <a href="signup.php">Create an account</a>';
                         }
                 ?>
             </div>
