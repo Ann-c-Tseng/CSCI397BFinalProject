@@ -5,8 +5,15 @@
 
 <script>
     function categorychoice(cc) {
-        document.getElementById('cc').value = cc.id;
-        return true;
+        //convert _ back to spaces for the query
+        document.getElementById('cc').value = (cc.id).replace('_', ' ');
+
+        if(cc.id == '' || cc.id == null){
+            alert(cc.id);
+            return false;
+        }else{
+            return true;
+        }
     }
 </script>
 
@@ -22,7 +29,7 @@
                 $name = $_SESSION['username'];
 
                 //grab all categories from 'posts' because all categories are viewable when we are signed in
-                $catQ = "SELECT DISTINCT * FROM posts;";
+                $catQ = "SELECT DISTINCT category FROM posts;";
                 $cats = $db->query($catQ);
 
                 if($cats == null) {
@@ -36,12 +43,18 @@
                     // Array of all values in the 'category' column
                     $columnArr = array_column($result, 'category');
                     
+                    //replace all spaces with _ to make button valid
+                    for($i = 0; $i < count($columnArr); $i++){
+                        $columnArr[$i] = str_replace(' ','_',$columnArr[$i]);
+                    }
+                    
                     echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
                     for($i = 0; $i < count($columnArr); $i++){
-                        echo '<button type="submit" class="category" onclick="return categorychoice('.$columnArr[$i].')" id="'.$columnArr[$i].'" name="'.$columnArr[$i].'">'.$columnArr[$i].'</button>';
+                        //convert the text for the button back to spaces for the user to see
+                        echo '<button type="submit" class="category" onclick="return categorychoice('.$columnArr[$i].')" id="'.$columnArr[$i].'">'.str_replace('_',' ',$columnArr[$i]).'</button>';
                     }          
                     echo '<input type = "hidden" id="cc" name="cc" value="">';
-                    echo '.</form>';
+                    echo '</form>';
                 }
 
             }
@@ -50,12 +63,12 @@
                     //If not signed in, still show all categories but when reaching viewerviewable==0(false), print out signin prompt
 
                     //all categories where signed in users can see
-                    $catQ = "SELECT DISTINCT * FROM posts where viewerviewable = 1;";
+                    $catQ = "SELECT DISTINCT category FROM posts where viewerviewable = 1;";
                     $cats = $db->query($catQ);
 
 
                     //all categories where non signed in users can't access
-                    $viewsQ = "SELECT DISTINCT * FROM posts where viewerviewable = 0;";
+                    $viewsQ = "SELECT DISTINCT category FROM posts where viewerviewable = 0;";
                     $views = $db->query($viewsQ);
 
                     if($cats == null && $views == null) {
@@ -77,22 +90,29 @@
                         //Array that not everyone can see
                         $viewsArr = array_column($result2, 'category');
 
+                        //replace all spaces with _ to make button valid
+                        for($i = 0; $i < count($catsArr); $i++){
+                            $catsArr[$i] = str_replace(' ','_',$catsArr[$i]);
+                        }
 
-                        //First form to send user to sign in
-                       // echo '<form action="./signin.php">';
+                        //replace all spaces with _ to make button valid
+                        for($i = 0; $i < count($viewsArr); $i++){
+                            $viewsArr[$i] = str_replace(' ','_',$viewsArr[$i]);
+                        }
+
+
                        echo '<ul>';
                         //Viewable to only signed in
                         for($i = 0; $i < count($viewsArr); $i++){
-                            echo '<li class="category"><a href="signin.php" >'.$viewsArr[$i].' --sign in to view</a></li>';
+                            echo '<li class="category"><a href="signin.php" >'.str_replace('_',' ',$viewsArr[$i]).' --sign in to view</a></li>';
                         }
                         echo '</ul>';
-                       // echo '</form>';
 
 
                         //second form to send user to topics page
                         echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
                         for($i = 0; $i < count($catsArr); $i++){
-                            echo '<button type="submit" class="category" onclick="return categorychoice('.$catsArr[$i].')" id="'.$catsArr[$i].'" name="'.$catsArr[$i].'">'.$catsArr[$i].'</button>';
+                            echo '<button type="submit" class="category" onclick="return categorychoice('.$catsArr[$i].')" id="'.$catsArr[$i].'">'.str_replace('_',' ',$catsArr[$i]).'</button>';
                         }          
                         echo '<input type = "hidden" id="cc" name="cc" value="">';
                         echo '</form>';
