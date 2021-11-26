@@ -2,6 +2,20 @@
     include 'header.php';
     include 'connect.php';
 ?>
+<script>
+    function topicchoice(tc) {
+        //convert _ back to spaces for the query
+        document.getElementById('tc').value = (tc.id).replace('_', ' ');
+        alert(tc.id);
+
+        if(tc.id == '' || tc.id == null){
+            alert(tc.id);
+            return false;
+        }else{
+            return true;
+        }
+    }
+</script>
 
 <!-- Show corresponding topics-->
 <div id="content">
@@ -22,11 +36,19 @@
             }
             // Array of all values from the 'topic' column
             $columnArr = array_column($result, 'topic');
-                
+
+            //replace all spaces with _ to make button valid
             for($i = 0; $i < count($columnArr); $i++){
-                // echo $columnArr[$i].'<br>';
-                echo "<a href=\"posts.php\">".$columnArr[$i]."</a><br>";
+                $columnArr[$i] = str_replace(' ','_',$columnArr[$i]);
             }
+                
+            echo '<form action="./posts.php" id = "topicsForm" name="topicsForm">';
+            for($i = 0; $i < count($columnArr); $i++){
+                //if topic has space in it that was previously converted to _, display the topic with space instead
+                echo '<button type="submit" class="category" onclick="return topicchoice('.$columnArr[$i].')" id="'.$columnArr[$i].'">'.str_replace('_',' ',$columnArr[$i]).'</button>';
+            }
+            echo '<input type = "hidden" id="tc" name="tc" value="">';
+            echo '</form>';
         }
     ?>    
 </div>
