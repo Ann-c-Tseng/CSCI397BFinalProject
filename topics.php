@@ -6,7 +6,6 @@
     function topicchoice(tc) {
         //convert _ back to spaces for the query
         document.getElementById('tc').value = (tc.id).replace('_', ' ');
-        alert(tc.id);
 
         if(tc.id == '' || tc.id == null){
             alert(tc.id);
@@ -22,7 +21,11 @@
     
     <?php
         $category = $_REQUEST['cc'];
-        //Use ^^^^^ to query. something like select all topic from posts where category = $category ???????????
+        
+        echo '<h1>'.$category.'</h1>';
+
+        //if admin or super user, create topic button here
+        //both can remove any topic as well
 
         $topQ = 'SELECT DISTINCT topic FROM posts WHERE category = "'.$category.'"';
 

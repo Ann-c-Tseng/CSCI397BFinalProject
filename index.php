@@ -22,11 +22,21 @@
 <!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
 <div id="content"> 
     <?php
+            echo '<h1>Categories</h1>';
             if(isset($_SESSION['signed_in']))
             {
                 echo 'Signed in: ';
 
                 $name = $_SESSION['username'];
+                //if super user, create category button here (insert query).
+                //super user can remove categories too (remove query)
+                //Need to implement so users cant have same username
+                $checkPerm = 'SELECT permission FROM users WHERE username = "'.$name.'"';
+                $perm = $db->query($checkPerm);
+                $permission = $perm->fetch(PDO::FETCH_ASSOC);
+
+                echo '<br>'.$name.' is a '.$permission['permission'];
+
 
                 //grab all categories from 'posts' because all categories are viewable when we are signed in
                 $catQ = "SELECT DISTINCT category FROM posts;";

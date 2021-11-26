@@ -66,7 +66,10 @@ if(isset($_REQUEST['activity'])){
     $activity = '';
 }
 if($activity=="signup")
-{
+{   
+
+    //Need to implement so users cant have same username
+    
     $name = $_REQUEST['username'];
     $pass = password_hash($_REQUEST['password'], PASSWORD_DEFAULT);
     $permission = $_REQUEST['permission'];
