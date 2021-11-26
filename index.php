@@ -24,22 +24,25 @@
     <?php
             if(isset($_SESSION['signed_in']))
             {
-                echo 'Signed in: ';
 
                 $name = $_SESSION['username'];
 
                 //grab all categories from 'posts' because all categories are viewable when we are signed in
                 $catQ = "SELECT DISTINCT category FROM posts;";
                 $cats = $db->query($catQ);
+                $row = $cats->fetch();
 
-                if($cats == null) {
+                if(!$row) {
                     echo '<br> No Categories created yet.';
                 } else{
+
+                    echo 'categories created';
+
+                    $result[]=null;
 
                     while($row = $cats->fetch(PDO::FETCH_ASSOC)){
                         $result[] = $row;
                     }
-                    
                     // Array of all values in the 'category' column
                     $columnArr = array_column($result, 'category');
                     
@@ -104,18 +107,18 @@
                        echo '<ul>';
                         //Viewable to only signed in
                         for($i = 0; $i < count($viewsArr); $i++){
-                            echo '<li class="category"><a href="signin.php" >'.str_replace('_',' ',$viewsArr[$i]).' --sign in to view</a></li>';
+                            echo '<li class="category"><a href="signin.php" >'.str_replace('_',' ',$viewsArr[$i]).' -- sign in to view</a></li>';
                         }
                         echo '</ul>';
 
 
-                        //second form to send user to topics page
+                        /*second form to send user to topics page
                         echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
                         for($i = 0; $i < count($catsArr); $i++){
                             echo '<button type="submit" class="category" onclick="return categorychoice('.$catsArr[$i].')" id="'.$catsArr[$i].'">'.str_replace('_',' ',$catsArr[$i]).'</button>';
                         }          
                         echo '<input type = "hidden" id="cc" name="cc" value="">';
-                        echo '</form>';
+                        echo '</form>';*/
                     }
             } ?>
             
