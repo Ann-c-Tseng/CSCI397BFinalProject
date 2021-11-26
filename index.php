@@ -36,6 +36,7 @@
                 echo "Your permission status is: viewer <br>";
             }
 
+            //Grabbing all the categories for the user, and displaying it differently depending on signedin or not(viewer)
             if(isset($_SESSION['signed_in']))
             {
                 echo '<br>Signed in: ';
