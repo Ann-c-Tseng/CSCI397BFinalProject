@@ -22,6 +22,7 @@
 <!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
 <div id="content"> 
     <?php
+
             // Check to see if person is super user, if so, show "add category button"
             if(isset($_SESSION['signed_in']))
             {
@@ -37,30 +38,28 @@
 
             if(isset($_SESSION['signed_in']))
             {
-                echo 'Signed in: ';
+                echo '<br>Signed in: ';
 
                 $name = $_SESSION['username'];
 
                 //grab all categories from 'posts' because all categories are viewable when we are signed in
                 $catQ = "SELECT DISTINCT category FROM posts;";
                 $cats = $db->query($catQ);
+                $count = 0;
 
-                if($cats == null) {
-                    echo '<br> No Categories created yet.';
-                } else{
-
-                    while($row = $cats->fetch(PDO::FETCH_ASSOC)){
+                while($row = $cats->fetch(PDO::FETCH_ASSOC)){
+                        $count++;
                         $result[] = $row;
-                    }
-                    
-                    // Array of all values in the 'category' column
-                    $columnArr = array_column($result, 'category');
+                        // Array of all values in the 'category' column
+                        $columnArr = array_column($result, 'category');
                     
                     //replace all spaces with _ to make button valid
                     for($i = 0; $i < count($columnArr); $i++){
                         $columnArr[$i] = str_replace(' ','_',$columnArr[$i]);
                     }
                     
+                }
+                if($count>0){
                     echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
                     for($i = 0; $i < count($columnArr); $i++){
                         //convert the text for the button back to spaces for the user to see
@@ -68,6 +67,10 @@
                     }          
                     echo '<input type = "hidden" id="cc" name="cc" value="">';
                     echo '</form>';
+                }
+
+                else{
+                        echo '<br>No categories created yet.';
                 }
 
             }
@@ -79,59 +82,77 @@
                     $catQ = "SELECT DISTINCT category FROM posts where viewerviewable = 1;";
                     $cats = $db->query($catQ);
 
-
                     //all categories where non signed in users can't access
                     $viewsQ = "SELECT DISTINCT category FROM posts where viewerviewable = 0;";
                     $views = $db->query($viewsQ);
+                    $count1=0;
+                    $count2=0;
 
-                    if($cats == null && $views == null) {
-                        echo '<br> No Categories created yet.';
-                    } else{
-                        //everyone can view
-                        while($row = $cats->fetch(PDO::FETCH_ASSOC)){
-                            $result1[] = $row;
-                        }
-                        
                         //not everyone can view
                         while($row = $views->fetch(PDO::FETCH_ASSOC)){
+                            $count1++;
                             $result2[] = $row;
-                        }
-                        
-                        //Array that everyone can see
-                        $catsArr = array_column($result1, 'category');
-
-                        //Array that not everyone can see
-                        $viewsArr = array_column($result2, 'category');
-
-                        //replace all spaces with _ to make button valid
-                        for($i = 0; $i < count($catsArr); $i++){
-                            $catsArr[$i] = str_replace(' ','_',$catsArr[$i]);
+                            //Array that not everyone can see
+                            $viewsArr = array_column($result2, 'category');
+    
+                            //replace all spaces with _ to make button valid
+                            for($i = 0; $i < count($viewsArr); $i++){
+                                $viewsArr[$i] = str_replace(' ','_',$viewsArr[$i]);
+                            }
+    
                         }
 
-                        //replace all spaces with _ to make button valid
-                        for($i = 0; $i < count($viewsArr); $i++){
-                            $viewsArr[$i] = str_replace(' ','_',$viewsArr[$i]);
+                        // sign in to view
+                        if($count1>0){
+                            echo '<form style = "margin-block-end:0" action="./signin.php" id = "homeForm" name="homeForm">';
+                            for($i = 0; $i < count($viewsArr); $i++){
+                                echo '<button type="submit" class="category" id="'.$viewsArr[$i].'">'.str_replace('_',' ',$viewsArr[$i]).'--sign in to view</button>';
+                            }          
+                            echo '</form>';
                         }
 
+                        while($row = $cats->fetch(PDO::FETCH_ASSOC)){
+                            $count2++;
+                            $result1[] = $row;
+                            //Array that everyone can see
+                            $catsArr = array_column($result1, 'category');
+                            //replace all spaces with _ to make button valid
+                            for($i = 0; $i < count($catsArr); $i++){
+                                $catsArr[$i] = str_replace(' ','_',$catsArr[$i]);
+                            }
 
-                       echo '<ul>';
-                        //Viewable to only signed in
-                        for($i = 0; $i < count($viewsArr); $i++){
-                            echo '<li class="category"><a href="signin.php" >'.str_replace('_',' ',$viewsArr[$i]).' --sign in to view</a></li>';
                         }
-                        echo '</ul>';
-
 
                         //second form to send user to topics page
-                        echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
-                        for($i = 0; $i < count($catsArr); $i++){
-                            echo '<button type="submit" class="category" onclick="return categorychoice('.$catsArr[$i].')" id="'.$catsArr[$i].'">'.str_replace('_',' ',$catsArr[$i]).'</button>';
-                        }          
-                        echo '<input type = "hidden" id="cc" name="cc" value="">';
-                        echo '</form>';
-                    }
-            } ?>
+                        if($count2>0){
+                            echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
+                            for($i = 0; $i < count($catsArr); $i++){
+                                echo '<button type="submit" class="category" onclick="return categorychoice('.$catsArr[$i].')" id="'.$catsArr[$i].'">'.str_replace('_',' ',$catsArr[$i]).'</button>';
+                            }          
+                            echo '<input type = "hidden" id="cc" name="cc" value="">';
+                            echo '</form>';
+                        }
+                        if($count1==0 && $count2==0){
+                            echo '<br> No categories created yet.';
+                        }
+            }
+    ?>
             
 </div>
 </body>
 </html>
+
+<!-- Check to see if person is super user, if so, show "add category button" -->
+<?php
+    if(isset($_SESSION['signed_in']))
+    {
+        $vv = $_SESSION['permission'];
+        echo "Your permission status is: ".$vv."<br>";
+        
+        if($vv === "superuser") {
+            include 'addcatbtn.php';
+        }
+    } else {
+        echo "Your permission status is: viewer <br>";
+    }
+?>
