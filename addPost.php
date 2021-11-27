@@ -15,7 +15,7 @@ include 'connect.php';
 
     
     if(isset($_SESSION['user_id'])){
-        $ID=$_GET['user_id'];
+        $ID=$_SESSION['user_id'];
     } else{
         $ID = 0;
     }
