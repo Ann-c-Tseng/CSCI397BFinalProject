@@ -23,6 +23,8 @@
 <div id="content"> 
     <?php
 
+
+        include 'search.php';
             // Check to see if person is super user, if so, show "add category button"
             if(isset($_SESSION['signed_in']))
             {
