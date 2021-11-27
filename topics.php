@@ -53,8 +53,10 @@
                 
                 echo '<form action="./posts.php" id = "topicsForm" name="topicsForm">';
                 for($i = 0; $i < count($columnArr); $i++){
-                    //if topic has space in it that was previously converted to _, display the topic with space instead
-                    echo '<button type="submit" class="category" onclick="return topicchoice('.$columnArr[$i].')" id="'.$columnArr[$i].'">'.str_replace('_',' ',$columnArr[$i]).'</button>';
+                    if($columnArr[$i] != ""){
+                        //if topic has space in it that was previously converted to _, display the topic with space instead
+                        echo '<button type="submit" class="category" onclick="return topicchoice('.$columnArr[$i].')" id="'.$columnArr[$i].'">'.str_replace('_',' ',$columnArr[$i]).'</button>';
+                    }
                 }
                 echo '<input type = "hidden" id="tc" name="tc" value="">';
                 echo '</form>';

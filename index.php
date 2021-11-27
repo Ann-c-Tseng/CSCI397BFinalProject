@@ -73,9 +73,11 @@
                 if($count>0){
                     echo '<form action="./topics.php" id = "homeForm" name="homeForm">';
                     for($i = 0; $i < count($columnArr); $i++){
-                        //convert the text for the button back to spaces for the user to see
-                        echo '<button type="submit" class="category" onclick="return categorychoice('.$columnArr[$i].')" id="'.$columnArr[$i].'">'.str_replace('_',' ',$columnArr[$i]).'</button>';
-                    }          
+                        if($columnArr[$i] != ""){
+                            //convert the text for the button back to spaces for the user to see
+                            echo '<button type="submit" class="category" onclick="return categorychoice('.$columnArr[$i].')" id="'.$columnArr[$i].'">'.str_replace('_',' ',$columnArr[$i]).'</button>';
+                        }   
+                    }       
                     echo '<input type = "hidden" id="cc" name="cc" value="">';
                     echo '</form>';
                 }
