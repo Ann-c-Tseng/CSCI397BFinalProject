@@ -59,6 +59,7 @@
                     }
                 }
                 echo '<input type = "hidden" id="tc" name="tc" value="">';
+                echo '<input type = "hidden" id="cc" name="cc" value="'.$category.'">';
                 echo '</form>';
             } // Query was not empty/null
         }
