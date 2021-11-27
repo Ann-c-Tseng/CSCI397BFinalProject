@@ -6,7 +6,7 @@
 <script>
     function categorychoice(cc) {
         //convert _ back to spaces for the query
-        document.getElementById('cc').value = (cc.id).replace('_', ' ');
+        document.getElementById('cc').value = (cc.id).replaceAll('_', ' ');
 
         if(cc.id == '' || cc.id == null){
             alert(cc.id);

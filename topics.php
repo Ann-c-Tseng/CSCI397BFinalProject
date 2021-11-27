@@ -5,7 +5,7 @@
 <script>
     function topicchoice(tc) {
         //convert _ back to spaces for the query
-        document.getElementById('tc').value = (tc.id).replace('_', ' ');
+        document.getElementById('tc').value = (tc.id).replaceAll('_', ' ');
 
         if(tc.id == '' || tc.id == null){
             alert(tc.id);
@@ -34,24 +34,30 @@
         if($tops == null){
             echo 'Something went wrong while accessing the database. Please try again later.';
         } else {
+            $result = null;
             while($row = $tops->fetch(PDO::FETCH_ASSOC)){
                 $result[] = $row;
             }
-            // Array of all values from the 'topic' column
-            $columnArr = array_column($result, 'topic');
+            
+            if($result == null){
+                echo "There are no topics in this category yet!";
+            } else{
+                // Array of all values from the 'topic' column
+                $columnArr = array_column($result, 'topic');
 
-            //replace all spaces with _ to make button valid
-            for($i = 0; $i < count($columnArr); $i++){
-                $columnArr[$i] = str_replace(' ','_',$columnArr[$i]);
-            }
+                //replace all spaces with _ to make button valid
+                for($i = 0; $i < count($columnArr); $i++){
+                    $columnArr[$i] = str_replace(' ','_',$columnArr[$i]);
+                }
                 
-            echo '<form action="./posts.php" id = "topicsForm" name="topicsForm">';
-            for($i = 0; $i < count($columnArr); $i++){
-                //if topic has space in it that was previously converted to _, display the topic with space instead
-                echo '<button type="submit" class="category" onclick="return topicchoice('.$columnArr[$i].')" id="'.$columnArr[$i].'">'.str_replace('_',' ',$columnArr[$i]).'</button>';
-            }
-            echo '<input type = "hidden" id="tc" name="tc" value="">';
-            echo '</form>';
+                echo '<form action="./posts.php" id = "topicsForm" name="topicsForm">';
+                for($i = 0; $i < count($columnArr); $i++){
+                    //if topic has space in it that was previously converted to _, display the topic with space instead
+                    echo '<button type="submit" class="category" onclick="return topicchoice('.$columnArr[$i].')" id="'.$columnArr[$i].'">'.str_replace('_',' ',$columnArr[$i]).'</button>';
+                }
+                echo '<input type = "hidden" id="tc" name="tc" value="">';
+                echo '</form>';
+            } // Query was not empty/null
         }
     ?>    
 </div>
