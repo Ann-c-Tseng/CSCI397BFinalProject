@@ -8,6 +8,16 @@
         document.getElementById("addcatbtnform").style.display="block";
         document.getElementById("hidebtn").style.display="block";
     }
+
+    function validate(){
+        let input = document.getElementById('catinput').value;
+        if(input == ''){
+            alert("Can't add an empty category!");
+            return false;
+        } else{
+            return true;
+        }
+    }
 </script>
 
 <?php
@@ -17,10 +27,13 @@ echo '
 
 echo '
     <button id ="hidebtn" type="button" onclick="hideform()"; style="display:none;">Hide Form</button>
-    <form method="post" action="addcategorynow.php" id="addcatbtnform" style="display:none;">
+    <form method="get" action="addcategorynow.php" id="addcatbtnform" style="display:none;">
         <label>New Category Name:</label><br>
-        <input value=""><br>
-        <button type="submit"/>Submit Category</button>
+        <input id="catinput" name="catinput" value=""><br>
+        <input type="checkbox" id=""viewable" name="viewable" value="1">
+        <label for="viewable">Everyone can view?</label>
+        <button type="submit" onclick="return validate()">Submit Category</button>
     </form> <br>
 ';
+
 ?>
