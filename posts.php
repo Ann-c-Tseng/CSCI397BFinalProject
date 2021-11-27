@@ -7,6 +7,7 @@ include 'connect.php';
 <div id="content">
     
     <?php
+        include 'search.php';
         $topic = $_REQUEST['tc'];
         echo '<h1>'.$topic.'</h1>';
 

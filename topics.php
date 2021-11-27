@@ -20,6 +20,7 @@
 <div id="content">
     
     <?php
+        include 'search.php';
         $category = $_REQUEST['cc'];
         
         echo '<h1>'.$category.'</h1>';

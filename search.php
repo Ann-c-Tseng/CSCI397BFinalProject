@@ -19,8 +19,8 @@ $rows = $db->query($query);
     $count = 0;
     while($row = $rows->fetch(PDO::FETCH_ASSOC)){
         $count++;
-        $category[] = $row;
-        $categories= array_column($category, 'category');
+        $searchcategory[] = $row;
+        $searchcategories= array_column($searchcategory, 'category');
     }
 echo '
     <form method="post" action="searchcontrol.php" name="filter" id="filter" style="display:none;">
@@ -28,11 +28,11 @@ echo '
         <label for="filters" style="display:none">Select a Category: </label>
         <select id="filters"  name="filters">
         <option value="any">All categories</option>';
-        for($i = 0; $i < count($categories); $i++) {
-            echo '<option>'.$categories[$i].'</option>';
+        foreach($searchcategories as $cats){
+            echo '<option value="'.$cats.'">'.$cats.'</option>';
         }
-        '</select>
-        <button type="submit"/>Search</button>
+        echo '</select>
+        <button type="submit">Search</button>
     </form> <br>
 ';
 ?>

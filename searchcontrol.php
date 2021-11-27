@@ -8,6 +8,7 @@
 <!-- Populate the "content" div with categories, topics, and posts based on if user is signed in or not -->
 <div id="content"> 
     <?php
+    include 'search.php';
     $keyword = $_REQUEST['keyword'];
     $category = $_REQUEST['filters'];
     echo $category;
@@ -16,7 +17,7 @@
         $query ="SELECT post FROM posts WHERE post LIKE '%".$keyword."%'";
     }
     else{
-        $query = "SELECT post FROM posts WHERE post LIKE '%".$keyword."%' AND category='.$category';";
+        $query = "SELECT post FROM posts WHERE post LIKE '%".$keyword."%' AND category='$category'";
     }
     $rows = $db->query($query);
     $count = 0;
