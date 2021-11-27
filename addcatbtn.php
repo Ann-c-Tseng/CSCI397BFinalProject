@@ -23,6 +23,9 @@
 <?php
 echo '
     <button type="button" onclick="showform()";>Add New Category?</button>
+    <form method="get" action="removeCat.php">
+    <button type="submit">Remove Category</button>
+    </form>
 ';
 
 echo '

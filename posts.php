@@ -30,7 +30,9 @@ include 'connect.php';
                 
             //populate div with posts
             for($i = 0; $i < count($columnArr); $i++){
-                echo '<p class="category">'.$columnArr[$i].'</p>';
+                if($columnArr[$i] != ""){
+                    echo '<p class="category">'.$columnArr[$i].'</p>';
+                }
             }
         }
     ?>    
