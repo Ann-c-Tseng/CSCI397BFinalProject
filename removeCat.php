@@ -34,7 +34,7 @@ include 'connect.php';
      
  }
  if($count>0){
-     echo '<form action="./remove.php" id = "homeForm" name="homeForm">';
+     echo '<form action="./removecategorynow.php" id = "homeForm" name="homeForm">';
      for($i = 0; $i < count($columnArr); $i++){
          if($columnArr[$i] != ""){
              //convert the text for the button back to spaces for the user to see
